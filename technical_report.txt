@@ -9,7 +9,40 @@ Election data source - https://www.elections.il.gov/ElectionOperations/DownloadV
 Census data source - https://www.census.gov/data/developers/data-sets/acs-5year.html (JSON format)
 
 Transform:
-Election - 
+Election - (Cleaning)
+	1. Dropped the following columns: 
+		-"CanAffilCommit" as it was empty
+		-"Election" as it was constant
+		-"VoteFor" as it was also constant
+		-"PartyAbbrev" as there is a "PartyName" column
+		-"OfficeSequence" as there is an "OfficeName" column 
+	2. Inspected NaN values, and made the following changes:
+		- PartyName null values corresponding to Judge Retain votes became "NON-PARTISAN"
+		- Some PartyName null values in 2014 had CanFirstName nulls in the same row, 
+		and corresponded to constitutional amendment and other proposal votes.
+			-PartyName became "NON-PARTISAN" and CanFirstName became "AMENDMENT" 
+			and "PROPOSITION", respectively. 
+		- Other PartyName null values, all corresponding to write-in candidates, 
+		became "WRITE IN"
+			-The write-in information came from our source website
+	3. Fixed inconsistencies in CanLastName values:
+		-Some names such as McCann were formatted "McCANN", while every other name was 
+		fully capitalized, so any name with a lower-case character became entirely uppercase
+	
+- (Transforming)
+	1. Split each of the three .csv files into three:
+		-candidate, ballotgroup, and votes tables
+		-candidate has columns CandidateID, CanFirstName, CanLastName, PartyName, and
+		OfficeName, with CandidateID as primary key
+		-ballotgroup has columns BallotGroup, OfficeName, and a new column, 
+		NumberRunning, which gives the number of candidates running for each office
+			-ballotgroup has a composite primary key of BallotGroup and OfficeName
+		-votes has columns CandidateID, County, and Votes, with CandidateID and 
+		County acting as composite primary key
+		-exported the nine total tables to .csv files
+
+- (Load)
+	Tables - candidates10, 14, and 18, ballotgroup10, 14, and 18, and vote10, 14 and 18
 
 Census - 
 	1. Rename columns from their census code to plain English.
