@@ -1,0 +1,22 @@
+At the end of the week, your team will submit a Final Report that describes the following:
+* *E*xtract: your original data sources and how the data was formatted (CSV, JSON, pgAdmin 4, etc).
+* *T*ransform: what data cleaning or transformation was required.
+* *L*oad: the final database, tables/collections, and why this was chosen.
+
+
+Extract:
+Election data source - https://www.elections.il.gov/ElectionOperations/DownloadVoteTotals.aspx?MID=vvc3ru6lLPI%3d&T=637675652614231245 (CSV format)
+Census data source - https://www.census.gov/data/developers/data-sets/acs-5year.html (JSON format)
+
+Transform:
+Election - 
+
+Census - 
+	1. Rename columns from their census code to plain English.
+	2. Split the name column (e.g. Adams County, Illinois) into two columns with the county name and state name.
+	3. Add a column called census_year identifying what census the information relates to.
+	4. Join all three census data frames into a single data frame.
+	5. Created a dataframe of county name and county id from unique values in the census dataframe. 
+
+Load:
+Tables - Census, County_ID, Elections
