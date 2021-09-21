@@ -1,3 +1,0 @@
-After transformation, we loaded the data into a relational database.  The census data was split into two tables: One with the county and county id and the other with household income, population, median age, income per capita, poverty count, county id, census year, and county name.  This is the data that will be used against the election data to look for trends.
-
-The voting data came from three seperate years.  Each was split into three tables.  The candidates table contains candidate id, first name, last name, party name, and office name.  The votes table contains candidate id, county, and number of votes.  The ballot groups table contains the ballot group and the office name.
