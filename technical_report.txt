@@ -41,9 +41,6 @@ Election - (Cleaning)
 		County acting as composite primary key
 		-exported the nine total tables to .csv files
 
-- (Load)
-	Tables - candidates10, 14, and 18, ballotgroup10, 14, and 18, and vote10, 14 and 18
-
 Census - 
 	1. Rename columns from their census code to plain English.
 	2. Split the name column (e.g. Adams County, Illinois) into two columns with the county name and state name.
@@ -52,4 +49,5 @@ Census -
 	5. Created a dataframe of county name and county id from unique values in the census dataframe. 
 
 Load:
-Tables - Census, County_ID, Elections
+(census) Tables - Census, County_ID
+(election) Tables - candidates10, 14, and 18, ballotgroup10, 14, and 18, and vote10, 14 and 18
